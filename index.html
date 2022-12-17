@@ -1,0 +1,99 @@
+<html lang="en">
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+<h1>Factoriales</h1>
+<div id="factorial_resultado" style="width:400px;height:200px;background-color:LightGray;text-align:center;">
+</div>
+<h1>Triangulos</h1>
+<div id="triangulos_resultado" style="width:400px;height:200px;background-color:LightGray;">
+</div>
+
+<script>
+    let numero_1 = ""
+    let numero_2 = ""
+
+    new swal({
+        title: 'Factoriales',
+        html:
+            '<input id="swal-input1" class="swal2-input">' +
+            '<input id="swal-input2" class="swal2-input">',
+        preConfirm: function () {
+            return new Promise(function (resolve) {
+                resolve([
+                    numero_1 = document.getElementById('swal-input1').value,
+                    numero_2 = document.getElementById('swal-input2').value
+                ])
+            })
+        },
+        onOpen: function () {
+            document.getElementById('swal-input1').focus()
+        }
+    }).then(function (result) {
+        new swal(JSON.stringify(result))
+
+        let num_1 = parseInt(numero_1)
+        let num_2 = parseInt(numero_2)
+
+        console.log(num_1,num_2)
+
+        let factorial_acumulado = 0
+
+        let resultado = ""
+
+        for (var i=num_1; i<=num_2; i++) {
+            factorial_acumulado = i
+            suma = 1
+            console.log("sacando la factorial de ",i)
+            for (var j=1;j<=i;j++) {
+                suma = suma * j
+                //console.log(j," * ",factorial_acumulado)
+                factorial_acumulado = factorial_acumulado * j
+
+            }
+            console.log(suma,"para ",i)
+
+            resultado = resultado + "factorial de " + i + " es " + suma + "\n"
+        }
+        document.getElementById("factorial_resultado").innerText = resultado
+
+        string_global = ""
+
+        string_inicial = " * * * * * * * * * *"
+
+        for (var i = 0;i < 10;i++){
+            console.log(string_inicial)
+            string_global = string_global + string_inicial + "\n"
+            string_inicial = string_inicial.replace(" *","")
+
+        }
+
+        string_inicial = " * * * * * * * * * *"
+
+        for (var i = 0;i < 10;i++){
+            console.log(string_inicial)
+            string_global = string_global + string_inicial + "\n"
+            string_inicial = string_inicial.replace(" *","  ")
+
+        }
+
+
+        for (var i = 1; i <= 10; i++) {
+            string_resultado = ''
+
+            for(var j = 1; j <= i; j++){
+             string_resultado = string_resultado + "* "
+            }
+
+            console.log(string_resultado)
+        }
+
+        document.getElementById("triangulos_resultado").innerText = string_global
+
+
+    }).catch(swal)
+</script>
+</body>
+</html>
